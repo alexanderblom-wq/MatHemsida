@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  height: 100vh;
+
+  background-image: url("");
+  background-size: cover;        /* fyller skärmen */
+  background-position: center;   /* centrerar bilden */
+  background-repeat: no-repeat;
+}
+
+.content {
+  color: white;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center; /* centerar horizotellt */
+  align-items: center;
+  height: 60px;
+  background-color: #333;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px; /* mellanrum mellan links */
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+}
+
+.nav-links a:hover {
+  color: #f4a261;
+}
