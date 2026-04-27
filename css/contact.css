@@ -1,17 +1,9 @@
 body {
   margin: 0;
   height: 100vh;
-  background-image: url(../images/slopgoy.jpg);
-  background-position: center;
-  background-size: cover;
+ 
   font-family: 'Instrument Serif', serif; /* Använder den importerade Google Font "Instrument Serif" */
   position: relative;
-}
-
-.content {
-  color: black;
-  text-align: center;
-  padding-top: 100px;
 }
 
 .navbar {
@@ -39,32 +31,47 @@ body {
 .nav-links a:hover {
   color: #f4a261;
 }
+
 .box1 {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   top: 25%;
   left: 50%;
+  width: 500px;
   transform: translateX(-50%);
-  background-color: #7DA075;
+  background-color: #2A3C26;
   padding: 10px 20px;
   border-radius: 5px;
   color: white;
 }
-.flexbox {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* centerar horisontellt */
-  align-items: center;     /* centerar vertikalt */
+
+.contacts{
+    background-color: #558350;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* centerar horisontellt */
+    align-items: center;     /* centerar vertikalt */
 }
-.accbox {
-  display: flex;
-  flex-direction: row;
-  justify-content: center; /* centerar horisontellt */
-  align-items: center;     /* centerar vertikalt */
+
+.contacts-middle{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centerar horisontellt */
+    align-items: center;     /* centerar vertikalt */
+    width: 150px;
+    
 }
-.accboxes {
-  background-color: #49663F;
-  padding: 10px 20px;
-  border-radius: 50px;
-  color: white;
-  margin: 10px; /* mellanrum mellan boxarna */
+
+img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
+
+.box2 {
+    background-color: #7DA075;
+}
+
