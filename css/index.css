@@ -1,11 +1,6 @@
 body {
   margin: 0;
   height: 100vh;
-
-  background-image: url("../images/pizzaimage.jpg");
-  background-size: cover;        /* fyller skärmen */
-  background-position: center;   /* centrerar bilden */
-  background-repeat: no-repeat;
   font-family: 'Instrument Serif', serif; /* Använder den importerade Google Font "Instrument Serif" */
   position: relative;
 }
