@@ -1,7 +1,7 @@
 body {
   margin: 0;
   height: 100vh;
- 
+  background-color:#7DA075;
   font-family: 'Instrument Serif', serif; /* Använder den importerade Google Font "Instrument Serif" */
   position: relative;
 }
@@ -37,9 +37,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  top: 25%;
+  top: 10%;
   left: 50%;
-  width: 500px;
+  width: 400px;
+  height: 350px;
   transform: translateX(-50%);
   background-color: #2A3C26;
   padding: 10px 20px;
@@ -49,7 +50,7 @@ body {
 
 .contacts{
     background-color: #558350;
-    
+    height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: center; /* centerar horisontellt */
@@ -73,5 +74,18 @@ img{
 
 .box2 {
     background-color: #7DA075;
+    width: 100px;
+    text-align: center;
+}
+
+.titel{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
 }
 
