@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #7DA075;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  background-color: #7DA075;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+
+.nav-links a {
+  text-decoration: underline;
+  color: black;
+  font-size: 18px;
+}
+
+.nav-links a:hover {
+  color: #f4a261;
+}
+
+.cart-icon {
+  position: absolute;
+  right: 20px;
+  width: 40px;
+}
+
+/* KATEGORI-RAD */
+.category-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  background-color: #6a9068;
+  border-radius: 14px;
+  padding: 14px;
+  margin: 10px;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  min-width: 70px;
+}
+
+.category-item img {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.category-item p {
+  font-size: 12px;
+  color: #111;
+  text-align: center;
+}
+
+.category-item:hover img {
+  outline: 2px solid #f4a261;
+}
+
+/* MAT-GRID */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 130px;
+  gap: 12px;
+  background-color: #6a9068;
+  border-radius: 14px;
+  padding: 14px;
+  margin: 0 10px 10px 10px;
+  overflow-y: auto;
+  flex: 1;
+  align-content: start;
+}
+
+/* MAT-KORT */
+.food-card {
+  border-radius: 12px;
+  overflow: hidden;
+  height: 130px;
+  position: relative;
+}
+
+.food-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: #f0ebe4;
+}
+
+.food-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.food-price {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+.add-btn {
+  background-color: #7DA075;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn:hover {
+  background-color: #5a7d58;
+}
