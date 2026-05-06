@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="../css/register.css" />
 
 </head>
 <body>
@@ -39,34 +39,38 @@
                 <div class="form-group">
                     <label for="InputFirstName">First Name</label>
                     <input type="text" name="firstname" class="form-control" id="InputFirstName" aria-describedby="emailHelp">
-                    
+                    <span class="error-msg" id="firstnameError"></span>
                 </div>
                 <div class="form-group">
                     <label for="InputLastName">Last Name</label>
                     <input type="text" name="lastname" class="form-control" id="InputLastName" aria-describedby="emailHelp">
+                    <span class="error-msg" id="lastnameError"></span>
                 </div>
                 <div class="form-group">
                     <label for="InputEmail">Email</label>
                     <input type="email" name="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+                    <span class="error-msg" id="emailError"></span>
                 </div>
                 <div class="form-group">
                     <label for="InputPassword">Password</label>
                     <input type="password" name="password" class="form-control" id="InputPassword">
+                    <span class="error-msg" id="passwordError"></span>
                 </div>
                 <div class="form-group">
                     <label for="InputPhone">Phone</label>
                     <input type="text" name="phone" class="form-control" id="InputPhone">
+                    <span class="error-msg" id="phoneError"></span>
                 </div>
                 <div class="form-group">
                     <label for="InputAddress">Address</label>
                     <input type="text" name="address" class="form-control" id="InputAddress">
+                    <span class="error-msg" id="addressError"></span>
                 </div>
-
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                <br>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                
                 </form>
                 
 
@@ -83,5 +87,6 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
+    <script src="../javascript/signup/validation.js"></script>
 </body>
 </html>
