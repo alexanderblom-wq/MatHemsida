@@ -51,9 +51,16 @@ server.get('/contact', (req, res) => {
 server.post('/register', async (req, res) => {
   const { firstname, lastname, phone, email, address, password } = req.body;
 
+
   try {
     // Hash the password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Generate a salt and hash the password using bcrypt with a salt rounds of 10
+
+
+    const salt = await bcrypt.genSalt(10);
+  
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     await db.query(
       `INSERT INTO users (firstname, lastname, phone, email, address, password)
