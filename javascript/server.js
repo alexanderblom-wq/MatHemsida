@@ -57,6 +57,10 @@ server.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'admin.html'));
 });
 
+server.get('/index', (req, res) => {
+  res.sendFile(path.join(__dirname, 'html', 'index.html'));
+});
+
 // Start the server
 server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
