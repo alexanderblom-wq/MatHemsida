@@ -4,6 +4,7 @@ import path from 'path';
 import { Client } from 'pg';
 import bcrypt from 'bcrypt';
 import authRoutes from './signup/auth.js';
+import loginRoutes from './login/login.js';
 
 // Server setup
 const server = express();
@@ -31,6 +32,7 @@ server.use((req, res, next) => {
 
 // Use auth routes
 server.use(authRoutes); 
+server.use(loginRoutes);
 
 // Routes
 server.get('/', (req, res) => {
@@ -59,6 +61,10 @@ server.get('/admin', (req, res) => {
 
 server.get('/index', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'index.html'));
+});
+
+server.get('/kart', (req, res) => {
+  res.sendFile(path.join(__dirname, 'html', 'kart.html'));
 });
 
 // Start the server
