@@ -86,3 +86,7 @@ body {
   background: #d9534f;
   color: white;
 }
+.add-btn a {
+  color: white;
+  text-decoration: none;
+}

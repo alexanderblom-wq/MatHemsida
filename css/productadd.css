@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  background: #7da075;
+  background-image: url(../images/slopgoy.jpg);
+  background-position: center;
+  background-size: cover;
+  font-family: "Instrument Serif", serif;
+}
+.back-btn {
+  border: none;
+  background: #2a3c26;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+  
+}
+.back-btn a {
+  color: white;
+  text-decoration: none;
+}
+.editbox {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 400px;
+  margin: 0 auto;
+background: #7da075;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
