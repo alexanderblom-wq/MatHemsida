@@ -1,7 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 
-
 // Server setup
 const loginRoutes = express.Router();
 
@@ -17,6 +16,8 @@ loginRoutes.post('/login', async (req, res) => {
         if (!validPassword) {
             return res.status(400).send('Invalid email or password.');
         }
+
+        req.session.userId = user.id;
 
         res.redirect('/menu');
     } catch (err) {
