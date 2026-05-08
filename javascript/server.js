@@ -5,6 +5,14 @@ import { Client } from 'pg';
 import bcrypt from 'bcrypt';
 import authRoutes from './signup/auth.js';
 import loginRoutes from './login/login.js';
+import session from 'express-session';
+
+function requireLogin(req, res, next) {
+    if (!req.session.userId) {
+        return res.redirect('/login');  // not logged in, send them back
+    }
+    next();  // logged in, let them through
+}
 
 // Server setup
 const server = express();
@@ -25,6 +33,15 @@ await db.connect();
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static(path.join(__dirname)));
 
+
+server.use(session({
+    secret: 'hddjduuawjdjuuddhsadhjdaeuusfhifdjfkj',        // change this to a long random string
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }         // set to true if using HTTPS
+}));
+
+
 server.use((req, res, next) => {
   req.db = db;
   next();
@@ -32,7 +49,7 @@ server.use((req, res, next) => {
 
 // Use auth routes
 server.use(authRoutes); 
-server.use(loginRoutes);
+server.use(loginRoutes); 
 
 // Routes
 server.get('/', (req, res) => {
@@ -47,7 +64,7 @@ server.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'register.html'));
 });
 
-server.get('/menu', (req, res) => {
+server.get('/menu', requireLogin, (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'menu.html'));
 });
 
@@ -55,7 +72,7 @@ server.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'contact.html'));
 });
 
-server.get('/admin', (req, res) => {
+server.get('/admin', requireLogin, (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'admin.html'));
 });
 
@@ -63,7 +80,7 @@ server.get('/index', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'index.html'));
 });
 
-server.get('/kart', (req, res) => {
+server.get('/kart', requireLogin, (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'kart.html'));
 });
 
