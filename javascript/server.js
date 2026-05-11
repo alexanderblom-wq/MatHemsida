@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt';
 import authRoutes from './signup/auth.js';
 import loginRoutes from './login/login.js';
 import session from 'express-session';
+import productRoutes from './admin/HandleProducts.js'; 
 
 function requireLogin(req, res, next) {
     if (!req.session.userId) {
@@ -50,8 +51,14 @@ server.use((req, res, next) => {
 // Use auth routes
 server.use(authRoutes); 
 server.use(loginRoutes); 
+server.use(productRoutes);
 
 // Routes
+
+server.get('/productadd', (req, res) => {
+  res.sendFile(path.join(__dirname, 'html', 'productadd.html'));
+});
+
 server.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'index.html'));
 });
