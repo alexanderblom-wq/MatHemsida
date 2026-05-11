@@ -55,7 +55,7 @@ server.use(productRoutes);
 
 // Routes
 
-server.get('/productadd', (req, res) => {
+server.get('/productadd', requireLogin, (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'productadd.html'));
 });
 
