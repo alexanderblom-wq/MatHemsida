@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 import authRoutes from './signup/auth.js';
 import loginRoutes from './login/login.js';
 import session from 'express-session';
-import productRoutes from './admin/HandleProducts.js'; 
+import productRoutes from './admin/HandleProducts.js';
 
 function requireLogin(req, res, next) {
     if (!req.session.userId) {
