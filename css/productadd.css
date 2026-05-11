@@ -36,3 +36,17 @@ background: #7da075;
   display: flex;
   flex-direction: column;
 }
+.holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+.littleholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  width: 120px;
+}
+

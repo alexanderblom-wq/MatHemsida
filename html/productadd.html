@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lägg till produkt</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -11,41 +11,56 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/productadd.css" />
-     <link
+    <link
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap"
       rel="stylesheet"
     />
-</head>
-<body>
-    
+  </head>
+  <body>
     <div class="editbox">
-        <h1>Lägg till produkt</h1>
-        <button class="back-btn"><a href="admin.html">Back</a></button>
-        <form>
-            <div class="form-group">
-            <label for="name">Namn:</label>
-            <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-            <label for="description">Beskrivning:</label>
-            <textarea id="description" name="description" required></textarea>
-            </div>
-             <div class="form-group">
-            <label for="price">Pris:</label>
-            <input type="number" id="price" name="price" step="0.01" required>
-            </div>
-            <div class="form-group">
-            <label for="image">Bild URL:</label>
-            <input type="text" id="image" name="image" required>
-            </div>
-            
-            <button type="submit">Lägg till produkt</button>
-        </form>
+      <h1>Lägg till produkt</h1>
+      <button class="back-btn"><a href="admin">Back</a></button>
+      <form action="/add-product" method="POST">
+        <div class="form-group">
+          <label for="name">Namn:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="description">Beskrivning:</label>
+          <textarea id="description" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="price">Pris:</label>
+          <input type="number" id="price" name="price" step="0.01" required />
+        </div>
+        <div class="form-group">
+          <label for="image">Bild URL:</label>
+          <input type="text" id="image" name="image" required />
+        </div>
+
+        <div class="holder">
+        <button type="submit">Lägg till produkt</button>
+        <div class="littleholder">
+        <label class="form-check-label" for="flexCheckDefault">
+            Innehåller kött
+          </label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="flexCheckDefault"
+            name="contains_meat"
+          />
+        </div>
+        </div>
+        </div>
+      </form>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-</body>
+  </body>
 </html>
