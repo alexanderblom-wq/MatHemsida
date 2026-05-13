@@ -1,70 +1,233 @@
+/* test.css */
 body {
-  margin: 0;
-  height: 100vh;
-  background-image: url(../images/slopgoy.jpg);
-  background-position: center;
-  background-size: cover;
-  font-family: 'Instrument Serif', serif; /* Använder den importerade Google Font "Instrument Serif" */
-  position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    min-height: 100vh;
+    background-image: url(../images/slopgoy.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Instrument Serif', serif;
+    position: relative;
 }
 
-.content {
-  color: black;
-  text-align: center;
-  padding-top: 100px;
-}
-
+/* NAVBAR - Gör position relative för korrekt absolut positionering av mobilmenyn */
 .navbar {
-  display: flex;
-  justify-content: center; /* centerar horizotellt */
-  align-items: center;
-  height: 60px;
-  background-color:#7DA075;
+    position: relative; /* Viktigt för att mobilmenyn ska hamna precis under */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+    background-color: #7DA075;
+    padding: 10px;
+    z-index: 10;
+}
+
+.hamburger {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 40px; /* mellanrum mellan links */
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
 }
 
 .nav-links a {
-  text-decoration: underline;
-  color: black;
-  font-size: 18px;
+    text-decoration: underline;
+    color: black;
+    font-size: 18px;
+    transition: color 0.2s;
 }
 
 .nav-links a:hover {
-  color: #f4a261;
+    color: #f4a261;
 }
+
+/* HUVUDBOX */
 .box1 {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #7DA075;
-  padding: 10px 20px;
-  border-radius: 5px;
-  color: white;
+    background-color: #7DA075;
+    color: white;
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
+
 .flexbox {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* centerar horisontellt */
-  align-items: center;     /* centerar vertikalt */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.flexbox h1 {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+}
+
+.flexbox h4 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+/* LOGIN KNAPPAR */
 .accbox {
-  display: flex;
-  flex-direction: row;
-  justify-content: center; /* centerar horisontellt */
-  align-items: center;     /* centerar vertikalt */
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
+
 .accboxes {
-  background-color: #49663F;
-  padding: 10px 20px;
-  border-radius: 50px;
-  color: white;
-  margin: 10px; /* mellanrum mellan boxarna */
+    background-color: #49663F;
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: white;
+    transition: transform 0.2s, background-color 0.2s;
+    cursor: pointer;
+}
+
+.accboxes:hover {
+    background-color: #3a5232;
+    transform: scale(1.02);
+}
+
+.accboxes a {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+/* Dölj tomt datum-element */
+#date {
+    display: none;
+}
+
+/* MOBILANPASSNING */
+@media (max-width: 768px) {
+    .navbar {
+        justify-content: space-between;
+        padding: 12px 20px;
+    }
+
+    .hamburger {
+        display: block;
+        font-size: 32px;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%; /* HAMNAR PRECIS UNDER NAVBAR */
+        left: 0;
+        right: 0;
+        width: 100%;
+        background-color: #7DA075;
+        flex-direction: column;
+        gap: 0;
+        text-align: center;
+        z-index: 1000;
+        padding: 10px 0;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 12px 12px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: 500;
+        display: block;
+        padding: 4px 0;
+    }
+
+    .box1 {
+        width: 90%;
+        padding: 20px 15px;
+        margin: 30px auto;
+    }
+
+    .flexbox h1 {
+        font-size: 2.5rem;
+    }
+
+    .flexbox h4 {
+        font-size: 1rem;
+    }
+
+    .accbox {
+        gap: 12px;
+    }
+
+    .accboxes {
+        flex: 1;
+        text-align: center;
+        padding: 12px 8px;
+        min-width: 120px;
+    }
+}
+
+/* EXTRA SMÅ ENHETER (MAX 480px) */
+@media (max-width: 480px) {
+    .flexbox h1 {
+        font-size: 2rem;
+    }
+
+    .flexbox h4 {
+        font-size: 0.95rem;
+    }
+
+    .accbox {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .accboxes {
+        width: 100%;
+        padding: 14px 8px;
+    }
+
+    .box1 {
+        width: 92%;
+        padding: 16px 12px;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+    }
 }
