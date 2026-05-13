@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Index page</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>Lägg till produkt</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -17,55 +17,46 @@
     />
   </head>
   <body>
-    <!--Navbar för enklare navigation-->
-    <nav class="navbar">
-      <div class="hamburger" onclick="toggleMenu()">☰</div>
-      <ul class="nav-links">
-        <li><a href="login">Home</a></li>
-        <li><a href="menu">Food Menu</a></li>
-        <li><a href="contact">Contact</a></li>
-      </ul>
-    </nav>
-    <h1 id="date"></h1>
+    <div class="editbox">
+      <h1>Lägg till produkt</h1>
+      <button class="back-btn"><a href="admin">← Tillbaka</a></button>
+      <form action="/add-product" method="POST">
+        <div class="form-group">
+          <label for="name">Namn:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="description">Beskrivning:</label>
+          <textarea id="description" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="price">Pris (SEK):</label>
+          <input type="number" id="price" name="price" step="0.01" required />
+        </div>
+        <div class="form-group">
+          <label for="image">Bild URL:</label>
+          <input type="text" id="image" name="image" required />
+        </div>
 
-    <!-- Box för inloggning / registrering -->
-    <div class="box1">
-      <h4>Est.1967</h4>
-      <div class="flexbox">
-        <h4 style="color: #4d7443">Three guys with a crazy idea!</h4>
-        <h1>Fork & Fun</h1>
-        <h4>Enjoy the taste of the best food</h4>
-        <div class="accbox">
-          <div class="accboxes">
-            <h4><a href="login">Log in</a></h4>
-          </div>
-          <div class="accboxes">
-            <h4><a href="register">Sign in</a></h4>
+        <div class="holder">
+          <button type="submit">Lägg till produkt</button>
+          <div class="littleholder">
+            <label class="form-check-label" for="flexCheckDefault">
+              Innehåller kött
+            </label>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="on"
+                id="flexCheckDefault"
+                name="contains_meat"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
-
-    <script>
-      // Toggle hamburger-menyn
-      function toggleMenu() {
-        document.querySelector(".nav-links").classList.toggle("active");
-      }
-
-      // Stäng menyn när en länk klickas (förbättrar UX på mobil)
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-          document.querySelector('.nav-links').classList.remove('active');
-        });
-      });
-
-      // Stäng menyn automatiskt om fönstret ändras till desktop-storlek
-      window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-          document.querySelector('.nav-links')?.classList.remove('active');
-        }
-      });
-    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
