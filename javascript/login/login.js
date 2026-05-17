@@ -12,7 +12,10 @@ loginRoutes.post('/login', async (req, res) => {
             return res.status(400).send('Invalid email or password.');
         }
         const user = result.rows[0];
+
+        // Compare the provided password with the hashed password in the database
         const validPassword = await bcrypt.compare(password, user.password);
+        
         if (!validPassword) {
             return res.status(400).send('Invalid email or password.');
         }

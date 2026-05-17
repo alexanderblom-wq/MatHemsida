@@ -3,10 +3,13 @@ import express from 'express';
 import path from 'path';
 import { Client } from 'pg';
 import bcrypt from 'bcrypt';
+import session from 'express-session';
+
+// routing
 import authRoutes from './signup/auth.js';
 import loginRoutes from './login/login.js';
-import session from 'express-session';
 import productRoutes from './admin/HandleProducts.js';
+import loadProducts from './kundvagn/LoadProducts.js';
 
 function requireLogin(req, res, next) {
     if (!req.session.userId) {
@@ -52,6 +55,7 @@ server.use((req, res, next) => {
 server.use(authRoutes); 
 server.use(loginRoutes); 
 server.use(productRoutes);
+server.use(loadProducts);
 
 // Routes
 

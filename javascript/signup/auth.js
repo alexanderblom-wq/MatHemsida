@@ -7,8 +7,11 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
   const { firstname, lastname, phone, email, address, password } = req.body;
   try {
+
+    // password encryption
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+    
     await req.db.query(
       `INSERT INTO users (firstname, lastname, phone, email, address, password)
        VALUES ($1, $2, $3, $4, $5, $6)`,
