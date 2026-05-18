@@ -72,5 +72,36 @@
   </div>
 
   <script src="../javascript/kundvagn/LoadProducts.js"></script>
+  <script>
+    async function renderFoodCards() {
+    const response = await fetch('/api/products');
+    const foods = await response.json();
+
+    const container = document.getElementById("food-container");
+    container.innerHTML = "";
+
+    foods.forEach(food => {
+        const card = document.createElement("div");
+        card.className = "food-card";
+
+        card.innerHTML = `
+            <img src="${food.image_path}" alt="${food.mat_namn}" class="food-img" />
+            <h3 class="food-name">${food.mat_namn}</h3>
+            <p class="food-description">${food.description}</p>
+            <p class="food-meat">
+                ${food.contains_meat ? "🥩 Innehåller kött" : "🥗 Vegetarisk"}
+            </p>
+            <div class="food-footer">
+                <span class="food-price">${food.mat_pris} kr</span>
+                <button class="add-btn">+</button>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+renderFoodCards();
+  </script>
 </body>
 </html>

@@ -1,16 +1,11 @@
 import express from 'express';
 const router = express.Router();
 
-
-router.get('/menu', async (req, res) => {
+router.get('/api/products', async (req, res) => {
     try {
         const result = await req.db.query('SELECT * FROM mat_ratter');
         const products = result.rows;
-        // create div for each product and append to menu
-        
-        
-
-
+        res.json(products);
     } catch (error) {
         console.error('Fel vid hämtning av produkter:', error);
         res.status(500).json({ error: 'Kunde inte hämta produkter' });
@@ -18,3 +13,4 @@ router.get('/menu', async (req, res) => {
 });
 
 export default router;
+

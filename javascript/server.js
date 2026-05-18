@@ -9,7 +9,7 @@ import session from 'express-session';
 import authRoutes from './signup/auth.js';
 import loginRoutes from './login/login.js';
 import productRoutes from './admin/HandleProducts.js';
-import loadProducts from './kundvagn/LoadProducts.js';
+import loadProducts from './kundvagn/LoadProducts.js'; 
 
 function requireLogin(req, res, next) {
     if (!req.session.userId) {
