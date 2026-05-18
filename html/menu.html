@@ -84,8 +84,10 @@
         const card = document.createElement("div");
         card.className = "food-card";
 
+        const imagePath = food.image_path ? `../images/${food.image_path}` : '../images/default-food.png';
+
         card.innerHTML = `
-            <img src="${food.image_path}" alt="${food.mat_namn}" class="food-img" />
+            <img src="${imagePath}" alt="${food.mat_namn}" class="food-img" />
             <h3 class="food-name">${food.mat_namn}</h3>
             <p class="food-description">${food.description}</p>
             <p class="food-meat">
