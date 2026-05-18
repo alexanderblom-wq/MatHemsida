@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fork & Fun – Kundvagn</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/kart.css" />
+  </head>
+  <body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <!-- Hamburger längst till vänster (endast mobil) -->
+      <button class="menu-btn" onclick="openMenu()">☰</button>
+
+      <!-- Desktop: centrerade länkar -->
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Food menu</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      
+    </nav>
+
+    <!-- OVERLAY -->
+    <div id="overlay" onclick="closeMenu()"></div>
+
+    <!-- MOBILE SIDE MENU -->
+  <div id="sideMenu">
+  <img src="/images/2085957-200.png" onclick="closeMenu()" class="close-img" alt="close" />
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Food menu</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</div>
+
+    <!-- CART -->
+    <main class="cart-page">
+      <div class="cart-outer">
+        <p class="cart-heading">Your cart</p>
+
+        <!-- Tom kundvagn – fylls senare via Node/pgAdmin -->
+        <div class="cart-box" id="cart-items">
+          <!-- cart items renderas här dynamiskt -->
+        </div>
+
+        <div class="cart-footer">
+          <button class="pay-btn">Betala</button>
+        </div>
+      </div>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function openMenu() {
+        document.getElementById('sideMenu').classList.add('open');
+        document.getElementById('overlay').classList.add('active');
+      }
+      function closeMenu() {
+        document.getElementById('sideMenu').classList.remove('open');
+        document.getElementById('overlay').classList.remove('active');
+      }
+    </script>
+
+  </body>
+</html>

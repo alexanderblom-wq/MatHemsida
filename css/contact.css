@@ -1,35 +1,112 @@
 body {
   margin: 0;
   height: 100vh;
-  background-color:#7DA075;
-  font-family: 'Instrument Serif', serif; /* Använder den importerade Google Font "Instrument Serif" */
+  background-color: #7DA075;
+  font-family: 'Instrument Serif', serif;
   position: relative;
 }
 
 .navbar {
   display: flex;
-  justify-content: center; /* centerar horizotellt */
+  justify-content: flex-start;
   align-items: center;
   height: 60px;
-  background-color:#7DA075;
+  background-color: #7DA075;
+  padding: 10px 20px;
 }
 
-.nav-links {
-  list-style: none;
+.menu-btn {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.menu-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
+}
+
+#sideMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 50vh;
+  background-color: #2A3C26;
+  z-index: 1000;
   display: flex;
-  gap: 40px; /* mellanrum mellan links */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+#sideMenu.open {
+  transform: translateY(0);
+}
+
+#sideMenu ul {
+  list-style: none;
   padding: 0;
   margin: 0;
+  width: 100%;
+  text-align: center;
 }
 
-.nav-links a {
-  text-decoration: underline;
-  color: black;
-  font-size: 18px;
+#sideMenu li {
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.nav-links a:hover {
+#sideMenu li:last-child {
+  border-bottom: none;
+}
+
+#sideMenu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-family: 'Instrument Serif', serif;
+}
+
+#sideMenu a:hover {
   color: #f4a261;
+}
+
+.close-img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border-radius: 50%;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+#overlay.active {
+  display: block;
 }
 
 .box1 {
@@ -46,46 +123,47 @@ body {
   padding: 10px 20px;
   border-radius: 5px;
   color: white;
+  z-index: 1;
 }
 
-.contacts{
-    background-color: #558350;
-    height: 100px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center; /* centerar horisontellt */
-    align-items: center;     /* centerar vertikalt */
+.contacts {
+  background-color: #558350;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.contacts-middle{
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* centerar horisontellt */
-    align-items: center;     /* centerar vertikalt */
-    width: 150px;
-    
+.contacts-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
 }
 
-img{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .box2 {
-    background-color: #7DA075;
-    width: 100px;
-    text-align: center;
+  background-color: #7DA075;
+  width: 100px;
+  text-align: center;
 }
 
-.titel{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
+.titel {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  white-space: nowrap;
+  pointer-events: none;
 }
-
