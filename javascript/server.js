@@ -59,7 +59,7 @@ server.use(loadProducts);
 
 // Routes
 
-server.get('/productadd', requireLogin, (req, res) => {
+server.get('/productadd', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'productadd.html'));
 });
 
@@ -75,7 +75,7 @@ server.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'register.html'));
 });
 
-server.get('/menu', requireLogin, (req, res) => {
+server.get('/menu', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'menu.html'));
 });
 
@@ -83,7 +83,7 @@ server.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'contact.html'));
 });
 
-server.get('/admin', requireLogin, (req, res) => {
+server.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'admin.html'));
 });
 

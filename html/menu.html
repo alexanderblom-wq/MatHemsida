@@ -85,6 +85,7 @@
         card.className = "food-card";
 
         const imagePath = food.image_path ? `../images/${food.image_path}` : '../images/default-food.png';
+        console.log(`Rendering food: ${food.mat_namn}, Image path: ${imagePath}`);
 
         card.innerHTML = `
             <img src="${imagePath}" alt="${food.mat_namn}" class="food-img" />
