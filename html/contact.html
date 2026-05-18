@@ -11,26 +11,22 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/contact.css" />
-    <link
+    <link 
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
+  
+
     <nav class="navbar">
-      <button class="menu-btn" onclick="openMenu()">☰</button>
-    </nav>
-
-    <div id="overlay" onclick="closeMenu()"></div>
-
-    <div id="sideMenu">
-      <img src="/images/2085957-200.png" onclick="closeMenu()" class="close-img" />
-      <ul>
-        <li><a href="index">Home</a></li>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+      <ul class="nav-links">
+        <li><a href="login">Home</a></li>
         <li><a href="menu">Food Menu</a></li>
         <li><a href="contact">Contact</a></li>
       </ul>
-    </div>
+    </nav>
 
     <div class="box1">
       <div class="contacts">
@@ -64,20 +60,31 @@
       <h4>Est.1967</h4>
     </div>
 
+    <script>
+      // Toggle hamburger-menyn
+      function toggleMenu() {
+        document.querySelector(".nav-links").classList.toggle("active");
+      }
+
+      // Stäng menyn när en länk klickas (förbättrar UX på mobil)
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.querySelector('.nav-links').classList.remove('active');
+        });
+      });
+
+      // Stäng menyn automatiskt om fönstret ändras till desktop-storlek
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          document.querySelector('.nav-links')?.classList.remove('active');
+        }
+      });
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    <script>
-      function openMenu() {
-        document.getElementById("sideMenu").classList.add("open");
-        document.getElementById("overlay").classList.add("active");
-      }
-      function closeMenu() {
-        document.getElementById("sideMenu").classList.remove("open");
-        document.getElementById("overlay").classList.remove("active");
-      }
-    </script>
+    
   </body>
 </html>
