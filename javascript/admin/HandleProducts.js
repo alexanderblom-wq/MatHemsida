@@ -18,4 +18,15 @@ productRoutes.post('/add-product', async (req, res) => {
     }
 });
 
+productRoutes.delete('/delete-product/:id', async (req, res) => {
+    const productId = req.params.id;
+    try {
+        await req.db.query('DELETE FROM mat_ratter WHERE id = $1', [productId]);
+        res.status(200).json({ message: 'Product deleted successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to delete product' });
+    }
+});
+
 export default productRoutes;

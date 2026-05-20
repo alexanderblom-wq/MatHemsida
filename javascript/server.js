@@ -10,6 +10,7 @@ import authRoutes from './signup/auth.js';
 import loginRoutes from './login/login.js';
 import productRoutes from './admin/HandleProducts.js';
 import loadProducts from './kundvagn/LoadProducts.js'; 
+import cartRoutes from './kundvagn/cart.js';
 
 function requireLogin(req, res, next) {
     if (!req.session.userId) {
@@ -35,14 +36,15 @@ await db.connect();
 
 // Middleware
 server.use(express.urlencoded({ extended: true }));
+server.use(express.json());
 server.use(express.static(path.join(__dirname)));
 
 
 server.use(session({
-    secret: 'hddjduuawjdjuuddhsadhjdaeuusfhifdjfkj',        // change this to a long random string
+    secret: 'hddjduuawjdjuuddhsadhjdaeuusfhifdjfkj',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }         // set to true if using HTTPS
+    cookie: { secure: false }
 }));
 
 
@@ -56,6 +58,7 @@ server.use(authRoutes);
 server.use(loginRoutes); 
 server.use(productRoutes);
 server.use(loadProducts);
+server.use(cartRoutes);
 
 // Routes
 
