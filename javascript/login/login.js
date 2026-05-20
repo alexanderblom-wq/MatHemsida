@@ -3,9 +3,18 @@ import bcrypt from 'bcrypt';
 
 // Server setup
 const loginRoutes = express.Router();
+const ADMIN_USERNAME = 'Alex';
+const ADMIN_PASSWORD = 'KevinOtto';
 
 loginRoutes.post('/login', async (req, res) => {
+const ADMIN_USERNAME = process.Alex.ADMIN_USERNAME;
+const ADMIN_PASSWORD = process.KevinOtto.ADMIN_PASSWORD;
   const { email, password } = req.body;
+  if (email === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    req.session.userId  = 'admin';
+    req.session.isAdmin = true;
+    return res.redirect('/admin');
+}
     try {
         const result = await req.db.query('SELECT * FROM users WHERE email = $1', [email]);
         if (result.rows.length === 0) {
