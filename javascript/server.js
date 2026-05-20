@@ -19,6 +19,20 @@ function requireLogin(req, res, next) {
     next();  // logged in, let them through
 }
 
+// funktion for requireadmin
+function requireAdmin(req, res, next) {
+    if (!req.session.userId) {
+        return res.redirect('/login');  // not logged in, send them back
+    }
+
+    // Check if the user is an admin
+    if (!req.session.isAdmin) {
+        return res.status(403).send('Access denied');
+    }
+
+    next();  // user is logged in and is an admin, let them through
+}
+
 // Server setup
 const server = express();
 const PORT = 3000;
@@ -86,7 +100,7 @@ server.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'contact.html'));
 });
 
-server.get('/admin', (req, res) => {
+server.get('/admin', requireLogin, (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'admin.html'));
 });
 
@@ -96,6 +110,10 @@ server.get('/index', (req, res) => {
 
 server.get('/kart', requireLogin, (req, res) => {
   res.sendFile(path.join(__dirname, 'html', 'kart.html'));
+});
+
+server.get('/betala', requireLogin, (req, res) => {
+  res.sendFile(path.join(__dirname, 'html', 'betala.html'));
 });
 
 // Start the server

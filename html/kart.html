@@ -31,8 +31,9 @@
         <p class="cart-heading">Your cart</p>
         <div class="cart-box" id="cart-items"></div>
         <div class="cart-footer">
-          <a href=""></a>
-          <button class="pay-btn">Betala</button>
+          <button class="pay-btn" onclick="goToPayment()">
+  Betala
+        </button>
         </div>
       </div>
     </main>
@@ -100,6 +101,18 @@
         });
         renderCart();
       }
+
+      async function goToPayment() {
+  const res = await fetch('/api/cart');
+  const items = await res.json();
+
+  if (items.length === 0) {
+    alert("Kundvagnen är tom!");
+    return;
+  }
+
+  window.location.href = "/betala";
+}
 
       renderCart();
     </script>
