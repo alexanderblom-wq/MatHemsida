@@ -56,91 +56,55 @@
   <!-- MAT-GRID -->
   <div class="food-grid">
 
-    <!-- Kort 1 -->
-    <div class="food-card">
-      <img src="" alt="" class="food-img" />
-      <div class="food-footer">
-        <span class="food-price">129 kr</span>
-        <button class="add-btn">+</button>
-      </div>
-    </div>
-
-    <!-- Kort 2 -->
-    <div class="food-card">
-      <img src="" alt="" class="food-img" />
-      <div class="food-footer">
-        <span class="food-price">129 kr</span>
-        <button class="add-btn">+</button>
-      </div>
-    </div>
-
-    <!-- Kort 3 -->
-    <div class="food-card">
-      <img src="" alt="" class="food-img" />
-      <div class="food-footer">
-        <span class="food-price">129 kr</span>
-        <button class="add-btn">+</button>
-      </div>
-    </div>
-
-    <!-- Kort 4 -->
-    <div class="food-card">
-      <img src="" alt="" class="food-img" />
-      <div class="food-footer">
-        <span class="food-price">129 kr</span>
-        <button class="add-btn">+</button>
-      </div>
-    </div>
-
-    <!-- Kort 5 -->
-    <div class="food-card">
-      <img src="" alt="" class="food-img" />
-      <div class="food-footer">
-        <span class="food-price">129 kr</span>
-        <button class="add-btn">+</button>
-      </div>
-    </div>
-
-    <!-- Kort 6 -->
-    <div class="food-card">
-      <img src="" alt="" class="food-img" />
-      <div class="food-footer">
-        <span class="food-price">129 kr</span>
-        <button class="add-btn">+</button>
-      </div>
-    </div>
-
-    <!-- Kort 7 -->
-    <div class="food-card">
-      <img src="" alt="" class="food-img" />
-      <div class="food-footer">
-        <span class="food-price">129 kr</span>
-        <button class="add-btn">+</button>
-      </div>
-    </div>
-
-    <!-- Kort 8 -->
-    <div class="food-card">
-      <img src="" alt="" class="food-img" />
-      <div class="food-footer">
-        <span class="food-price">129 kr</span>
-        <button class="add-btn">+</button>
-      </div>
-    </div>
+    <div id="food-container"></div>
 
     <!-- Kort 9 -->
-    <div class="food-card">
+    <!-- <div class="food-card">
       <img src="" alt="" class="food-img" />
       <div class="food-footer">
         <span class="food-price">129 kr</span>
         <button class="add-btn">+</button>
       </div>
-    </div>
+    </div> -->
 
     <!-- Kopiera ett food-card block för att lägga till fler rätter -->
 
   </div>
 
   <script src="../javascript/kundvagn/LoadProducts.js"></script>
+  <script>
+    async function renderFoodCards() {
+    const response = await fetch('/api/products');
+    const foods = await response.json();
+
+    const container = document.getElementById("food-container");
+    container.innerHTML = "";
+
+    foods.forEach(food => {
+        const card = document.createElement("div");
+        card.className = "food-card";
+
+        const imagePath = food.image_path ? `../images/${food.image_path}` : '../images/default-food.png';
+        console.log(`Rendering food: ${food.mat_namn}, Image path: ${imagePath}`);
+
+        card.innerHTML = `
+            <img src="${imagePath}" alt="${food.mat_namn}" class="food-img" />
+            <h3 class="food-name">${food.mat_namn}</h3>
+            <p class="food-description">${food.description}</p>
+            <p class="food-meat">
+                ${food.contains_meat ? "🥩 Innehåller kött" : "🥗 Vegetarisk"}
+            </p>
+            <div class="food-footer">
+                <span class="food-price">${food.mat_pris} kr</span>
+                <button class="add-btn">+</button>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
+
+renderFoodCards();
+  </script>
 </body>
 </html>

@@ -88,16 +88,19 @@ body {
 
 /* MAT-GRID */
 .food-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 130px;
-  gap: 12px;
   background-color: #6a9068;
   border-radius: 14px;
   padding: 14px;
   margin: 0 10px 10px 10px;
   overflow-y: auto;
   flex: 1;
+}
+
+#food-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 130px;
+  gap: 12px;
   align-content: start;
 }
 
@@ -151,4 +154,18 @@ body {
 
 .add-btn:hover {
   background-color: #5a7d58;
+}
+
+.food-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 130px;
+  gap: 12px;
+  background-color: #6a9068;
+  border-radius: 14px;
+  padding: 14px;
+  margin: 0 10px 10px 10px;
+  overflow-y: auto;
+  flex: 1;
+  align-content: start;
 }
