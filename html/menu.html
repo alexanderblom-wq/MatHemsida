@@ -98,7 +98,6 @@
     </div>
 `;
 
-<<<<<<< HEAD
         card.innerHTML = `
             <img src="${imagePath}" alt="${food.mat_namn}" class="food-img" />
             <h3 class="food-name">${food.mat_namn}</h3>
@@ -111,44 +110,147 @@
                 <button class="add-btn">+</button>
             </div>
         `;
-=======
           container.appendChild(card);
         });
       }
->>>>>>> 79e11ff0493d972067fa8fff65d7437e13ae9c3c
 
       renderFoodCards();
     </script>
-    <script>
-      async function addToCart(id, namn, pris, bild) {
-        const response = await fetch("/api/cart/add", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id, name: namn, price: pris, image: bild }),
-        });
+    <script src="../javascript/kundvagn/LoadProducts.js"></script>
 
-        if (response.ok) {
-          alert(`${namn} lades till i kundvagnen!`);
-        }
+<script>
+  // =========================
+  // RENDER FOOD CARDS
+  // =========================
+  async function renderFoodCards() {
+    try {
+      const response = await fetch("/api/products");
+
+      if (!response.ok) {
+        throw new Error("Kunde inte hämta produkter");
       }
 
-      function toggleMenu() {
-        document.querySelector(".nav-links").classList.toggle("active");
+      const foods = await response.json();
+
+      const container = document.getElementById("food-container");
+      container.innerHTML = "";
+
+      foods.forEach((food) => {
+        const card = document.createElement("div");
+        card.className = "food-card";
+
+        const imagePath = food.image_path
+          ? `../images/${food.image_path}`
+          : "../images/default-food.png";
+
+        card.innerHTML = `
+          <img 
+            src="${imagePath}" 
+            alt="${food.mat_namn}" 
+            class="food-img"
+          />
+
+          <h3 class="food-name">${food.mat_namn}</h3>
+
+          <p class="food-description">
+            ${food.description || "Ingen beskrivning"}
+          </p>
+
+          <p class="food-meat">
+            ${
+              food.contains_meat
+                ? "🥩 Innehåller kött"
+                : "🥗 Vegetarisk"
+            }
+          </p>
+
+          <div class="food-footer">
+            <span class="food-price">
+              ${food.mat_pris} kr
+            </span>
+
+            <button class="add-btn">
+              +
+            </button>
+          </div>
+        `;
+
+        // ADD TO CART BUTTON
+        const addButton = card.querySelector(".add-btn");
+
+        addButton.addEventListener("click", () => {
+          addToCart(
+            food.id,
+            food.mat_namn,
+            food.mat_pris,
+            food.image_path
+          );
+        });
+
+        container.appendChild(card);
+      });
+    } catch (error) {
+      console.error("Fel vid rendering av produkter:", error);
+    }
+  }
+
+  // =========================
+  // ADD TO CART
+  // =========================
+  window.addToCart = async function (id, namn, pris, bild) {
+    try {
+      const response = await fetch("/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          name: namn,
+          price: pris,
+          image: bild,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Kunde inte lägga till i kundvagn");
       }
 
-      // Stäng menyn när en länk klickas (förbättrar UX på mobil)
-      document.querySelectorAll(".nav-links a").forEach((link) => {
-        link.addEventListener("click", () => {
-          document.querySelector(".nav-links").classList.remove("active");
-        });
-      });
+      alert(`${namn} lades till i kundvagnen!`);
+    } catch (error) {
+      console.error("Cart error:", error);
+      alert("Något gick fel.");
+    }
+  };
 
-      // Stäng menyn automatiskt om fönstret ändras till desktop-storlek
-      window.addEventListener("resize", function () {
-        if (window.innerWidth > 768) {
-          document.querySelector(".nav-links")?.classList.remove("active");
-        }
-      });
-    </script>
+  // =========================
+  // MOBILE MENU
+  // =========================
+  function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+  }
+
+  // GLOBAL så onclick fungerar
+  window.toggleMenu = toggleMenu;
+
+  // Stäng meny när man klickar på länk
+  document.querySelectorAll(".nav-links a").forEach((link) => {
+    link.addEventListener("click", () => {
+      document.querySelector(".nav-links").classList.remove("active");
+    });
+  });
+
+  // Stäng meny vid desktop-size
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      document.querySelector(".nav-links")?.classList.remove("active");
+    }
+  });
+
+  // =========================
+  // START
+  // =========================
+  renderFoodCards();
+</script>
   </body>
 </html>
