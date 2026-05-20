@@ -41,10 +41,10 @@ server.use(express.static(path.join(__dirname)));
 
 
 server.use(session({
-    secret: 'hddjduuawjdjuuddhsadhjdaeuusfhifdjfkj',        // change this to a long random string
+    secret: 'hddjduuawjdjuuddhsadhjdaeuusfhifdjfkj',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }         // set to true if using HTTPS
+    cookie: { secure: false }
 }));
 
 
