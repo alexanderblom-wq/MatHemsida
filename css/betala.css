@@ -1,103 +1,18 @@
-/* Grundinstallningar */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    background-color: #7b9c76; /* Den grona bakgrunden */
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    /* Gor att body blir exakt lika hog som skarmen och hindrar scroll */
-    height: 100vh;
-    overflow: hidden; 
-    padding: 2vh 2vw; /* Dynamisk padding baserat pa skarmstorlek */
+  background-color: #7DA075; 
+  margin: 0;
 }
 
-/* Huvudcontainer som fyller ut skarmen perfekt */
-.container {
-    width: 100%;
-    max-width: 1200px; 
-    height: 94vh; /* Tar upp nastan hela skarmens hojd */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Sprider ut elementen jamnt */
-    gap: 2vh; /* Avstand baserat pa skarmens hojd */
+.thank-you-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-/* Header for tillbaka-knappen */
-.header {
-    display: flex;
-    justify-content: flex-start;
-    flex-shrink: 0; /* Hindrar knappen fran att krympa */
-}
-
-/* Tillbaka-knappen */
-.back-btn {
-    background-color: #dcdcdc;
-    color: #333;
-    text-decoration: none;
-    padding: 12px 35px;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: background 0.2s;
-}
-
-.back-btn:hover {
-    background-color: #c5c5c5;
-}
-
-/* Den stora morka boxen anpassar sig nu flexibelt */
-.cart-display {
-    background-color: #2b3a27; /* Morkgron yta */
-    flex-grow: 2; /* Gor att denna box tar upp mest plats pa skarmen */
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 1.5rem;
-    padding: 20px;
-    min-height: 0; /* Tillater boxen att krympa om skarmen ar jatteliten */
-}
-
-/* Layout for de tre boxarna langst ner */
-.image-selection {
-    display: flex;
-    justify-content: space-between;
-    gap: 2vw; /* Flexibelt avstand i bredd */
-    flex-grow: 1; /* Tar upp resten av utrymmet */
-    max-height: 25vh; /* Hindrar de nedre boxarna fran att bli for hoga */
-    min-height: 120px; /* Minsta tillatna hojd sa de inte forsvinner */
-}
-
-/* De tre klickbara boxarna */
-.image-box {
-    flex: 1; /* Gor att alla tre tar lika mycket plats i bredd */
-    background-color: #dcdcdc;
-    border-radius: 20px; /* Rundade horn enligt skissen */
-    overflow: hidden; /* Ser till att bilden stannar inuti de rundade hornen */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-/* Effekt nar man hovrar over de klickbara bilderna */
-.image-box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.18);
-}
-
-/* Ser till att bilderna fyller ut boxarna snyggt utan att skeva */
-.image-box img {
-    width: 100%;
-    height: 100%
+.thank-you-wrapper h1 {
+  font-size: calc(1.525rem + 3.3vw);
+  font-weight: 300;
+  line-height: 1.2;
 }
