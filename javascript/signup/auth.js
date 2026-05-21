@@ -10,7 +10,9 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
 
     // Hämtar alla fält från formuläret
-    const { firstname, lastname, phone, email, address, password } = req.body;
+    // Gör email till lowercase så det alltid sparas likadant
+    const { firstname, lastname, phone, address, password } = req.body;
+    const email = req.body.email.toLowerCase();
 
     try {
 
@@ -25,8 +27,8 @@ router.post('/register', async (req, res) => {
             [firstname, lastname, phone, email, address, hashedPassword]
         );
 
-        // Skickar success-meddelande
-        res.send('User registered successfully!');
+        // Skickar användare till menyn
+        res.redirect('/login');
 
     } catch (err) {
         console.error(err);

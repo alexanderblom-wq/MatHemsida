@@ -25,7 +25,8 @@ router.get('/api/cart', async (req, res) => {
             c.quantity,
             m.mat_namn AS name,
             m.mat_pris AS price,
-            m.image_path AS image
+            m.image_path AS image,
+            m.contains_meat
 
         FROM cart c
 

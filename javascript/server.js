@@ -33,8 +33,9 @@ function requireAdmin(req, res, next) {
         return res.redirect('/login');
     }
 
-    if (!req.session.isAdmin) {
-        return res.status(403).send('Access denied');
+    // Måste ha isAdmin = true i sessionen
+    if (req.session.isAdmin !== true) {
+        return res.status(403).send('Åtkomst nekad – du är inte admin.');
     }
 
     next();
@@ -97,7 +98,13 @@ server.use(cartRoutes);
 // SIDROUTES
 // ==========================
 
-server.get('/productadd', (req, res) => {
+// Logga ut som rensar sessionen
+server.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/index');
+});
+
+server.get('/productadd', requireAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'productadd.html'));
 });
 
@@ -113,16 +120,17 @@ server.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'register.html'));
 });
 
-server.get('/menu', (req, res) => {
+server.get('/menu', requireLogin, (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'menu.html'));
 });
 
 server.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'contact.html'));
-});
+});  
+
 
 // Kräver inloggning
-server.get('/admin', requireLogin, (req, res) => {
+server.get('/admin',requireAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'admin.html'));
 });
 
@@ -139,6 +147,11 @@ server.get('/kart', requireLogin, (req, res) => {
 server.get('/betala', requireLogin, (req, res) => {
     res.sendFile(path.join(__dirname, 'html', 'betala.html'));
 });
+
+server.get('/productadd', requireAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'html', 'productadd.html'));
+});
+
 
 
 // ==========================

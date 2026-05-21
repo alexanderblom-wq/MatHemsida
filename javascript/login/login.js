@@ -3,33 +3,22 @@ import bcrypt from 'bcrypt';
 
 const loginRoutes = express.Router();
 
-// Admin-uppgifter
-const ADMIN_USERNAME = 'Alex';
-const ADMIN_PASSWORD = 'KevinOtto';
-
 
 // ==========================
 // LOGGA IN
 // ==========================
 loginRoutes.post('/login', async (req, res) => {
 
-    const ADMIN_USERNAME = process.Alex.ADMIN_USERNAME;
-    const ADMIN_PASSWORD = process.KevinOtto.ADMIN_PASSWORD;
-
     // Hämtar email och lösenord från formuläret
-    const { email, password } = req.body;
-
-    // Kollar om det är admin som loggar in
-    if (email === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-        req.session.userId = 'admin';
-        req.session.isAdmin = true;
-        return res.redirect('/admin');
-    }
+    // Gör email till lowercase så jämförelsen fungerar oavsett stora/små bokstäver
+    const { password } = req.body;
+    const email = req.body.email.toLowerCase();
 
     try {
 
         // Letar efter användaren i databasen
-        const result = await req.db.query('SELECT * FROM users WHERE email = $1', [email]);
+        // LOWER() gör så databasens email också blir lowercase
+        const result = await req.db.query('SELECT * FROM users WHERE LOWER(email) = $1', [email]);
 
         // Om ingen användare hittades
         if (result.rows.length === 0) {
@@ -49,7 +38,13 @@ loginRoutes.post('/login', async (req, res) => {
         // Sparar användarens id i sessionen
         req.session.userId = user.id;
 
-        // Skickar till menyn
+        // Kollar om användaren är admin i databasen
+        if (user.is_admin) {
+            req.session.isAdmin = true;
+            return res.redirect('/admin');
+        }
+
+        // Vanlig användare skickas till menyn
         res.redirect('/menu');
 
     } catch (err) {

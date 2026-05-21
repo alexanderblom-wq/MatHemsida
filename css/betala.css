@@ -1,6 +1,7 @@
 body {
-  background-color: #7DA075; 
+  background-color: #7DA075;
   margin: 0;
+  font-family: 'Instrument Serif', serif;
 }
 
 .thank-you-wrapper {
@@ -11,8 +12,32 @@ body {
   text-align: center;
 }
 
-.thank-you-wrapper h1 {
+.thank-you-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.thank-you-content h1 {
   font-size: calc(1.525rem + 3.3vw);
   font-weight: 300;
   line-height: 1.2;
+  color: white;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  background-color: white;
+  color: #2A3C26;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.back-btn:hover {
+  background-color: #2A3C26;
+  color: white;
 }
