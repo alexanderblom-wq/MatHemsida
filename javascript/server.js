@@ -1,59 +1,77 @@
-// importing moduler
+// ==========================
+// IMPORTS
+// ==========================
 import express from 'express';
 import path from 'path';
 import { Client } from 'pg';
 import bcrypt from 'bcrypt';
 import session from 'express-session';
 
-// routing
+// Importerar routes
 import authRoutes from './signup/auth.js';
 import loginRoutes from './login/login.js';
 import productRoutes from './admin/HandleProducts.js';
-import loadProducts from './kundvagn/LoadProducts.js'; 
+import loadProducts from './kundvagn/LoadProducts.js';
 import cartRoutes from './kundvagn/cart.js';
 
+
+// ==========================
+// MIDDLEWARE-FUNKTIONER
+// ==========================
+
+// Kollar om användaren är inloggad
 function requireLogin(req, res, next) {
     if (!req.session.userId) {
-        return res.redirect('/login');  // not logged in, send them back
+        return res.redirect('/login');
     }
-    next();  // logged in, let them through
+    next();
 }
 
-// funktion for requireadmin
+// Kollar om användaren är admin
 function requireAdmin(req, res, next) {
     if (!req.session.userId) {
-        return res.redirect('/login');  // not logged in, send them back
+        return res.redirect('/login');
     }
 
-    // Check if the user is an admin
     if (!req.session.isAdmin) {
         return res.status(403).send('Access denied');
     }
 
-    next();  // user is logged in and is an admin, let them through
+    next();
 }
 
-// Server setup
+
+// ==========================
+// SERVER SETUP
+// ==========================
 const server = express();
 const PORT = 3000;
 const __dirname = path.resolve();
 
+// Databasanslutning
 const db = new Client({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'food_delivery_db',
-  password: '123qwe!"#',
-  port: 5432,
+    user: 'postgres',
+    host: 'localhost',
+    database: 'food_delivery_db',
+    password: '123qwe!"#',
+    port: 5432,
 });
 
 await db.connect();
 
-// Middleware
+
+// ==========================
+// MIDDLEWARE
+// ==========================
+
+// Gör så servern kan läsa formulärdata och JSON
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
+
+// Serverar statiska filer (css, bilder, etc)
 server.use(express.static(path.join(__dirname)));
 
-
+// Session-hantering för inloggning
 server.use(session({
     secret: 'hddjduuawjdjuuddhsadhjdaeuusfhifdjfkj',
     resave: false,
@@ -61,62 +79,71 @@ server.use(session({
     cookie: { secure: false }
 }));
 
-
+// Gör databasen tillgänglig i alla routes
 server.use((req, res, next) => {
-  req.db = db;
-  next();
+    req.db = db;
+    next();
 });
 
-// Use auth routes
-server.use(authRoutes); 
-server.use(loginRoutes); 
+// Använder alla routes
+server.use(authRoutes);
+server.use(loginRoutes);
 server.use(productRoutes);
 server.use(loadProducts);
 server.use(cartRoutes);
 
-// Routes
+
+// ==========================
+// SIDROUTES
+// ==========================
 
 server.get('/productadd', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'productadd.html'));
+    res.sendFile(path.join(__dirname, 'html', 'productadd.html'));
 });
 
 server.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'index.html'));
+    res.sendFile(path.join(__dirname, 'html', 'index.html'));
 });
 
 server.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'login.html'));
+    res.sendFile(path.join(__dirname, 'html', 'login.html'));
 });
 
 server.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'register.html'));
+    res.sendFile(path.join(__dirname, 'html', 'register.html'));
 });
 
 server.get('/menu', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'menu.html'));
+    res.sendFile(path.join(__dirname, 'html', 'menu.html'));
 });
 
 server.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'contact.html'));
+    res.sendFile(path.join(__dirname, 'html', 'contact.html'));
 });
 
+// Kräver inloggning
 server.get('/admin', requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'admin.html'));
+    res.sendFile(path.join(__dirname, 'html', 'admin.html'));
 });
 
 server.get('/index', (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'index.html'));
+    res.sendFile(path.join(__dirname, 'html', 'index.html'));
 });
 
+// Kräver inloggning
 server.get('/kart', requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'kart.html'));
+    res.sendFile(path.join(__dirname, 'html', 'kart.html'));
 });
 
+// Kräver inloggning
 server.get('/betala', requireLogin, (req, res) => {
-  res.sendFile(path.join(__dirname, 'html', 'betala.html'));
+    res.sendFile(path.join(__dirname, 'html', 'betala.html'));
 });
 
-// Start the server
+
+// ==========================
+// STARTA SERVERN
+// ==========================
 server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
